@@ -14,7 +14,8 @@ class ThankyouScreen extends Component {
       <View style={styles.container}>
         <Text style={Fonts.h3}>
           Thank you for registering with us. Will contact soon to this number{' '}
-          {this.props.connectionDetails.mobileNumber}
+          {this.props.connectionDetails.mobileNumber}. Your user id will get sent to this{' '}
+          {this.props.connectionDetails.email}
         </Text>
       </View>
     )
