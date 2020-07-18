@@ -38,7 +38,7 @@ class LoginScreen extends React.Component {
         ]}
       >
         <View style={{alignContent: 'center', justifyContent: 'center'}}>
-          <Text>Username:</Text>
+          <Text>User Id:</Text>
           <TextInput
           style={{height: 40, borderColor: "gray", borderWidth: 0.2}}
           placeholder="Enter username"
