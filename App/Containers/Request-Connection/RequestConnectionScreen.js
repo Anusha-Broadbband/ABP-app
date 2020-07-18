@@ -1,32 +1,32 @@
 import { ApplicationStyles, Fonts } from 'App/Theme'
 import React, { Component } from 'react'
-import {
-   Text,
-
-   TextInput, TouchableOpacity, View
-} from 'react-native'
+import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux'
-import styles from './RequestConnectionStyles'
-
+import styles from './RequestConnectionScreenStyles'
+import Loader from 'App/Components/Loader'
+import RequestConnectionActions from 'App/Stores/RequestConnection/Actions'
 
 class RequestConnection extends Component {
-  state = {
-    name: '',
-    plan: '1 year',
-    email: '',
-    mobileNumber: '',
-    landMark: '',
-    address: '',
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: '',
+      plan: '1 year',
+      email: '',
+      mobileNumber: '',
+      landMark: '',
+      address: '',
+    }
   }
-  request = () => {}
 
   render() {
     return (
       <KeyboardAwareScrollView>
         <Text style={Fonts.h3}>Request for connection form</Text>
         <View style={styles.container}>
+          <Loader loading={this.props.isLoading} />
           <TextInput
             style={ApplicationStyles.input}
             underlineColorAndroid="transparent"
@@ -99,7 +99,7 @@ class RequestConnection extends Component {
           />
           <TouchableOpacity
             style={ApplicationStyles.button}
-            onPress={() => this.request(this.state.email, this.state.password)}
+            onPress={() => this.props.request(this.state)}
           >
             <Text style={styles.submitButtonText}> Submit </Text>
           </TouchableOpacity>
@@ -110,9 +110,15 @@ class RequestConnection extends Component {
 }
 
 export const mapDispatchToProps = (dispatch) => ({
-  request: (details) => dispatch(requestActions.submit(details)),
+  request: (details) => dispatch(RequestConnectionActions.requestConnection(details)),
 })
+
+const mapStateToProps = (state) => ({
+  isLoading: state.requestConnection.requestConnectionLoading,
+  errorMessage: state.requestConnection.requestConnectionErrorMessage,
+})
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(RequestConnection)

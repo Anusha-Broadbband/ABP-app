@@ -1,9 +1,10 @@
+import Loader from 'App/Components/Loader'
 import LoginActions from 'App/Stores/Login/Actions'
 import { ApplicationStyles } from 'App/Theme'
 import React, { Component } from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
-import styles from "./LoginScreenStyles"
+import styles from './LoginScreenStyles'
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -14,15 +15,10 @@ class LoginScreen extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.userDetails !== this.props.userDetails) {
-      this.props.navigation.navigate('Home')
-    }
-  }
-
   render() {
     return (
       <View style={styles.container}>
+        <Loader loading={this.props.isLoading} />
         <TextInput
           style={ApplicationStyles.input}
           underlineColorAndroid="transparent"
@@ -47,16 +43,14 @@ class LoginScreen extends Component {
         >
           <Text style={styles.submitButtonText}> Login </Text>
         </TouchableOpacity>
-        {this.props.isLoading && <Text>Logging in</Text>}
         {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
       </View>
     )
   }
 }
 const mapStateToProps = (state) => ({
-  userDetails: state.login.userDetails,
   isLoading: state.login.loginLoading,
-  errorMessage: state.login.loginErroMessage,
+  errorMessage: state.login.loginErrorMessage,
 })
 
 const mapDispatchToProps = (dispatch) => ({

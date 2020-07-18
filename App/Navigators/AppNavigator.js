@@ -1,22 +1,16 @@
-import { createAppContainer, createStackNavigator } from 'react-navigation'
-
-import LoginScreen from 'App/Containers/Login/LoginScreen'
-import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import HomeScreen from 'App/Containers/Home/HomeScreen'
+import LoginScreen from 'App/Containers/Login/LoginScreen'
 import StartScreen from 'App/Containers/Main/StartScreen'
-import RequestConnection from 'App/Containers/Request-Connection/RequestConnection'
-
-/**
- * The root screen contains the application's navigation.
- *
- * @see https://reactnavigation.org/docs/en/hello-react-navigation.html#creating-a-stack-navigator
- */
+import { createAppContainer, createStackNavigator } from 'react-navigation'
+import RequestConnectionScreen from 'App/Containers/Request-Connection/RequestConnectionScreen'
+import ThankyouScreen from 'App/Containers/Thankyou/ThankyouScreen'
 const StackNavigator = createStackNavigator(
   {
     MainScreen: StartScreen,
     Login: LoginScreen,
     Home: HomeScreen,
-    RequestConnection: RequestConnection
+    RequestConnection: RequestConnectionScreen,
+    Thankyou: ThankyouScreen
   },
   {
     initialRouteName: 'MainScreen',
