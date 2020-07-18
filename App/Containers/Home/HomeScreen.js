@@ -1,7 +1,7 @@
+import { Helpers, Metrics } from 'App/Theme'
 import React from 'react'
-import { Platform, Text, View, TextInput, Button, Alert} from 'react-native'
+import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
-import {Helpers, Metrics } from 'App/Theme'
 
 class HomeScreen extends React.Component {
   constructor(props) {

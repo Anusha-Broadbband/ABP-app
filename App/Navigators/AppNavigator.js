@@ -4,6 +4,7 @@ import LoginScreen from 'App/Containers/Login/LoginScreen'
 import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import HomeScreen from 'App/Containers/Home/HomeScreen'
 import StartScreen from 'App/Containers/Main/StartScreen'
+import RequestConnection from 'App/Containers/Request-Connection/RequestConnection'
 
 /**
  * The root screen contains the application's navigation.
@@ -14,7 +15,8 @@ const StackNavigator = createStackNavigator(
   {
     MainScreen: StartScreen,
     Login: LoginScreen,
-    Home: HomeScreen
+    Home: HomeScreen,
+    RequestConnection: RequestConnection
   },
   {
     initialRouteName: 'MainScreen',

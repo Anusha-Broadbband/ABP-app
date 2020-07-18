@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Button, StyleSheet, TouchableOpacity, Text } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from './StartScreenStyle'
 
@@ -19,7 +19,7 @@ const App = ({navigation}) => {
       <Text style={styles.titleText}>ABP</Text>
       <View style={styles.screenContainer}>
         <AppButton title="Login!" size="sm" backgroundColor="#007bff"  onPress={()=> navigation.navigate('Login')}/>
-        <AppButton title="Request for a connection" size="sm" backgroundColor="#007bff" />
+        <AppButton title="Request for a connection" size="sm" backgroundColor="#007bff" onPress={()=> navigation.navigate('RequestConnection')}/>
         <AppButton title="Sign up" size="sm" backgroundColor="#007bff" />
       </View>
     </View>

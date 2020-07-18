@@ -6,7 +6,22 @@
 import Colors from './Colors'
 
 export default {
+  input: {
+    margin: 15,
+    height: 40,
+    borderColor: Colors.primary,
+    borderWidth: 1,
+  },
+  dropdown: {
+    margin: 15,
+    height: 40,
+    borderColor: Colors.primary,
+    borderWidth: 1,
+  },
   button: {
     backgroundColor: Colors.primary,
+    padding: 10,
+    margin: 15,
+    height: 40,
   },
 }
