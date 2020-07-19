@@ -6,6 +6,7 @@ import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux'
 import styles from './SignupScreenStyles'
+import Icon from 'react-native-vector-icons/Entypo'
 
 class SignupScreen extends Component {
   constructor(props) {
@@ -60,25 +61,34 @@ class SignupScreen extends Component {
             }
           />
 
-          <TextInput
-            style={ApplicationStyles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Confirm password"
-            placeholderTextColor="black"
-            autoCapitalize="none"
-            onChangeText={(confirmPassword) => {
-              this.setState({ confirmPassword }, () => {
-                this.verifyPassword()
-              })
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
-          />
-          {this.state.confirmPassword ? (
-            this.state.matched ? (
-              <Text style={{ color: 'green' }}>Passwords matched</Text>
-            ) : (
-              <Text style={{ color: 'red' }}>Passwords did not match</Text>
-            )
-          ) : null}
+          >
+            <TextInput
+              style={[ApplicationStyles.input, { flex: 1 }]}
+              underlineColorAndroid="transparent"
+              placeholder="Confirm password"
+              placeholderTextColor="black"
+              autoCapitalize="none"
+              onChangeText={(confirmPassword) => {
+                this.setState({ confirmPassword }, () => {
+                  this.verifyPassword()
+                })
+              }}
+            />
+            {this.state.confirmPassword ? (
+              this.state.matched ? (
+                <Icon name="check" color="green" size={20}/>
+              ) : (
+                <Icon name="cross" color="red" size={20}/>
+              )
+            ) : null}
+          </View>
 
           <TouchableOpacity
             style={ApplicationStyles.button}
@@ -88,7 +98,7 @@ class SignupScreen extends Component {
             disabled={!this.state.matched}
           >
             <Text style={styles.submitButtonText}> Sign Up </Text>
-          {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
+            {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
           </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>
@@ -103,7 +113,7 @@ export const mapDispatchToProps = (dispatch) => ({
 export const mapStateToProps = (state) => ({
   userId: state.login.userId,
   isLoading: state.signup.isLoading,
-  errorMessage: state.signup.errorMessage
+  errorMessage: state.signup.errorMessage,
 })
 
 export default connect(
