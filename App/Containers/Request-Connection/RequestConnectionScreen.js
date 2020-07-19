@@ -8,17 +8,41 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux'
 import FormButton from '../../Components/FormButton/FormButton'
+import ErrorMessage from '../../Components/ErrorMessage/ErrorMessage'
 import styles from './RequestConnectionScreenStyles'
 import { Formik } from 'formik'
 import { curryN } from 'ramda'
+import * as Yup from 'yup'
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .label('Name')
+    .required('Please enter name.'),
+  mobile: Yup.number()
+    .label('MobileNumber')
+    .required('Please enter mobile number.')
+    .min(10, 'Mobile number should be at least 10 digits.')
+    .max(10, 'Mobile number should be at least 10 digits.'),
+  email: Yup.string()
+    .label('Email')
+    .email('Enter a valid email')
+    .required('Please enter valid email.'),
+  landMark: Yup.string()
+    .label('LandMark')
+    .required('Please enter land mark.'),
+  plan: Yup.string()
+    .label('Plan')
+    .required('Please choose one of the plan.'),
+  address: Yup.string()
+    .label('Address')
+    .required('Please enter address.'),
+})
 
 class RequestConnection extends Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
-
-  curry = (fn, value) => fn(value)
 
   render() {
     return (
@@ -29,17 +53,16 @@ class RequestConnection extends Component {
           <Formik
             initialValues={{
               name: '',
-              plan: '1 year',
+              plan: '',
               email: '',
               mobileNumber: '',
               landMark: '',
               address: '',
             }}
-            onSubmit={(values) => {
-              alert(JSON.stringify(values))
-            }}
+            onSubmit={(values) => this.props.request(values)}
+            validationSchema={validationSchema}
           >
-            {({ handleChange, values, handleSubmit }) => (
+            {({ handleChange, values, handleSubmit, errors }) => (
               <Fragment>
                 <FormInput
                   name="Name"
@@ -50,6 +73,7 @@ class RequestConnection extends Component {
                   iconName="user"
                   iconColor="#2C384A"
                 />
+                <ErrorMessage errorValue={errors.name} />
 
                 <DropDownPicker
                   style={ApplicationStyles.dropdown}
@@ -71,6 +95,7 @@ class RequestConnection extends Component {
                   dropDownStyle={{ backgroundColor: '#fafafa' }}
                   onChangeItem={(text) => curryN(1, handleChange('plan'))(text.value)}
                 />
+                <ErrorMessage errorValue={errors.plan} />
 
                 <FormInput
                   name="Email"
@@ -81,6 +106,7 @@ class RequestConnection extends Component {
                   iconName="email"
                   iconColor="#2C384A"
                 />
+                <ErrorMessage errorValue={errors.email} />
 
                 <FormInput
                   name="mobileNumber"
@@ -91,6 +117,7 @@ class RequestConnection extends Component {
                   iconName="mobile"
                   iconColor="#2C384A"
                 />
+                <ErrorMessage errorValue={errors.mobile} />
 
                 <FormInput
                   name="landMark"
@@ -101,6 +128,7 @@ class RequestConnection extends Component {
                   iconName="address"
                   iconColor="#2C384A"
                 />
+                <ErrorMessage errorValue={errors.landMark} />
 
                 <FormInput
                   name="address"
@@ -113,6 +141,7 @@ class RequestConnection extends Component {
                   iconName="address"
                   iconColor="#2C384A"
                 />
+                <ErrorMessage errorValue={errors.address} />
 
                 <View style={ApplicationStyles.button}>
                   <FormButton
