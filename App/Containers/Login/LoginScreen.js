@@ -1,16 +1,18 @@
+import FormInput from 'App/Components/FormInput/FormInput'
 import Loader from 'App/Components/Loader'
 import LoginActions from 'App/Stores/Login/Actions'
 import { ApplicationStyles, Fonts } from 'App/Theme'
 import React, { Component } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
+import FormButton from '../../Components/FormButton/FormButton'
 import styles from './LoginScreenStyles'
 
 class LoginScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userName: '',
+      userId: '',
       password: '',
     }
   }
@@ -20,33 +22,37 @@ class LoginScreen extends Component {
       <View style={styles.container}>
         <Loader loading={this.props.isLoading} />
         <Text style={Fonts.h3}>Login</Text>
-        <TextInput
-          style={ApplicationStyles.input}
-          underlineColorAndroid="transparent"
-          placeholder="User Id"
-          placeholderTextColor="grey"
-          defaultValue={this.props.userId}
+
+        <FormInput
+          name="userId"
+          value={this.state.userId}
+          placeholder="Please enter user id"
+          autoCapitalize="none"
+          onChangeText={(userId) => this.setState({ userId })}
           editable={false}
-          autoCapitalize="none"
-          onChangeText={(text) => this.setState({ userName: text })}
+          iconName="user"
+          iconColor="#2C384A"
         />
 
-        <TextInput
-          style={ApplicationStyles.input}
-          underlineColorAndroid="transparent"
-          placeholder="Password"
-          placeholderTextColor="grey"
-          autoCapitalize="none"
-          secureTextEntry = {true}
+        <FormInput
+          name="password"
+          value={this.state.password}
+          placeholder="Enter password"
+          secureTextEntry
           onChangeText={(text) => this.setState({ password: text })}
+          iconName="lock"
+          iconColor="#2C384A"
         />
 
-        <TouchableOpacity
-          style={ApplicationStyles.button}
-          onPress={() => this.props.login(this.state.userName, this.state.password)}
-        >
-          <Text style={styles.submitButtonText}> Login </Text>
-        </TouchableOpacity>
+        <View style={ApplicationStyles.button}>
+          <FormButton
+            buttonType="outline"
+            onPress={() => this.props.login(this.state.userId, this.state.password)}
+            title="Login"
+            buttonColor="#fff"
+          />
+        </View>
+
         {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
       </View>
     )
@@ -59,7 +65,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (userName, password) => dispatch(LoginActions.authenticate(userName, password)),
+  login: (userId, password) => dispatch(LoginActions.authenticate(userId, password)),
 })
 
 export default connect(

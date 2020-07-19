@@ -1,14 +1,14 @@
+import FormInput from 'App/Components/FormInput/FormInput'
 import Loader from 'App/Components/Loader'
 import SignupActions from 'App/Stores/Signup/Actions'
 import { ApplicationStyles, Fonts } from 'App/Theme'
 import React, { Component } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { connect } from 'react-redux'
-import styles from './SignupScreenStyles'
 import Icon from 'react-native-vector-icons/Entypo'
-import FormInput from 'App/Components/FormInput/FormInput'
+import { connect } from 'react-redux'
 import FormButton from '../../Components/FormButton/FormButton'
+import styles from './SignupScreenStyles'
 
 class SignupScreen extends Component {
   constructor(props) {
@@ -47,7 +47,6 @@ class SignupScreen extends Component {
           <Loader loading={this.props.isLoading} />
           <FormInput
             name="User id"
-            value={this.state.userId}
             defaultValue={this.props.userId}
             placeholder="User id"
             autoCapitalize="none"
@@ -99,7 +98,6 @@ class SignupScreen extends Component {
               onPress={this.handleOnSignUp}
               title="Sign Up"
               buttonColor="#fff"
-              disabled={!this.state.matched}
             />
           </View>
 

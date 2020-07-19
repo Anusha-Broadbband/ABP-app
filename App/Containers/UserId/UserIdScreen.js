@@ -2,8 +2,10 @@ import Loader from 'App/Components/Loader'
 import LoginActions from 'App/Stores/Login/Actions'
 import { ApplicationStyles, Fonts } from 'App/Theme'
 import React, { Component } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
+import FormButton from '../../Components/FormButton/FormButton'
+import FormInput from '../../Components/FormInput/FormInput'
 import styles from './UserIdScreenStyles'
 
 class UserIdScreen extends Component {
@@ -19,21 +21,25 @@ class UserIdScreen extends Component {
       <View style={styles.container}>
         <Loader loading={this.props.isLoading} />
         <Text style={Fonts.h3}>User Id</Text>
-        <TextInput
-          style={ApplicationStyles.input}
-          underlineColorAndroid="transparent"
-          placeholder="User Id"
-          placeholderTextColor="grey"
+
+        <FormInput
+          name="userId"
+          value={this.state.userId}
+          placeholder="Please enter name"
           autoCapitalize="none"
-          onChangeText={(text) => this.setState({ userId: text })}
+          onChangeText={(userId) => this.setState({ userId })}
+          iconName="user"
+          iconColor="#2C384A"
         />
 
-        <TouchableOpacity
-          style={ApplicationStyles.button}
-          onPress={() => this.props.verifyUserId(this.state.userId)}
-        >
-          <Text style={styles.submitButtonText}> Next </Text>
-        </TouchableOpacity>
+        <View style={ApplicationStyles.button}>
+          <FormButton
+            buttonType="outline"
+            onPress={() => this.props.verifyUserId(this.state.userId)}
+            title="Next"
+            buttonColor="#fff"
+          />
+        </View>
         {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
       </View>
     )
