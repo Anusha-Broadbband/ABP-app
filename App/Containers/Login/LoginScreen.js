@@ -25,6 +25,8 @@ class LoginScreen extends Component {
           underlineColorAndroid="transparent"
           placeholder="User Id"
           placeholderTextColor="grey"
+          defaultValue={this.props.userId}
+          editable={false}
           autoCapitalize="none"
           onChangeText={(text) => this.setState({ userName: text })}
         />
@@ -35,6 +37,7 @@ class LoginScreen extends Component {
           placeholder="Password"
           placeholderTextColor="grey"
           autoCapitalize="none"
+          secureTextEntry = {true}
           onChangeText={(text) => this.setState({ password: text })}
         />
 
@@ -50,6 +53,7 @@ class LoginScreen extends Component {
   }
 }
 const mapStateToProps = (state) => ({
+  userId: state.login.userId,
   isLoading: state.login.loginLoading,
   errorMessage: state.login.loginErrorMessage,
 })

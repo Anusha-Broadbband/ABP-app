@@ -44,6 +44,7 @@ class SignupScreen extends Component {
             defaultValue={this.props.userId}
             placeholder="User id"
             placeholderTextColor="black"
+            editable={false}
             autoCapitalize="none"
             onChangeText={(userId) => this.setState({ userId })}
           />
@@ -51,6 +52,7 @@ class SignupScreen extends Component {
           <TextInput
             style={ApplicationStyles.input}
             underlineColorAndroid="transparent"
+            secureTextEntry = {true}
             placeholder="Password"
             placeholderTextColor="black"
             autoCapitalize="none"
@@ -72,6 +74,7 @@ class SignupScreen extends Component {
             <TextInput
               style={[ApplicationStyles.input, { flex: 1 }]}
               underlineColorAndroid="transparent"
+              secureTextEntry = {true}
               placeholder="Confirm password"
               placeholderTextColor="black"
               autoCapitalize="none"

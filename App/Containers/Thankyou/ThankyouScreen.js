@@ -1,8 +1,8 @@
+import { ApplicationStyles, Fonts } from 'App/Theme'
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
 import styles from './ThankyouScreenStyles'
-import { Fonts } from 'App/Theme'
 
 class ThankyouScreen extends Component {
   constructor(props) {
@@ -17,6 +17,12 @@ class ThankyouScreen extends Component {
           {this.props.connectionDetails.mobileNumber}. Your user id will get sent to this{' '}
           {this.props.connectionDetails.email}
         </Text>
+        <TouchableOpacity
+          style={ApplicationStyles.button}
+          onPress={() => this.props.navigation.navigate('Main')}
+        >
+          <Text style={{color: '#fff'}}>Go to Home </Text>
+        </TouchableOpacity>
       </View>
     )
   }

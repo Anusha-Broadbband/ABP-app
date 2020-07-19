@@ -8,7 +8,7 @@ import UserIdScreen from '../Containers/UserId/UserIdScreen'
 import SignupScreen from '../Containers/Signup/SignupScreen'
 const StackNavigator = createStackNavigator(
   {
-    MainScreen: StartScreen,
+    Main: StartScreen,
     Login: LoginScreen,
     Home: HomeScreen,
     RequestConnection: RequestConnectionScreen,
@@ -17,7 +17,7 @@ const StackNavigator = createStackNavigator(
     Signup: SignupScreen
   },
   {
-    initialRouteName: 'MainScreen',
+    initialRouteName: 'Main',
     headerMode: 'none',
   }
 )

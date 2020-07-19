@@ -20,6 +20,8 @@ export default {
   },
   button: {
     backgroundColor: Colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 10,
     margin: 15,
     height: 40,
