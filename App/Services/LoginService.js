@@ -8,28 +8,63 @@ const isWithin = curryN(3, (min, max, value) => {
 })
 const in200s = isWithin(200, 299)
 
+const loginApiClient = (data) =>
+  axios.create(
+    {
+      baseURL: `${Config.BASE_URL}api/login`,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      timeout: 3000,
+    },
+    data
+  )
 
-const loginApiClient = (data)=> axios.create({
-  baseURL: `${Config.BASE_URL}api/login`,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-  timeout: 3000,
-},data)
+const verifyUserIdClient = (data) =>
+  axios.create(
+    {
+      baseURL: `${Config.BASE_URL}api/verify`,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      timeout: 3000,
+    },
+    data
+  )
 
 function authenticateUser(userName, password) {
- 	return loginApiClient({userName, password}).post().then((response) => {
-    if (in200s(response.status)) {
-      return response.data
-    }
+  return loginApiClient({ userName, password })
+    .post()
+    .then((response) => {
+      if (in200s(response.status)) {
+        return response.data
+      }
 
-    return null
-  }).catch((error)=>{
-    throw new error("could not connect")
-  })
+      return null
+    })
+    .catch((error) => {
+      throw new error('could not connect')
+    })
+}
+
+function verifyUserId(userId) {
+  return verifyUserIdClient({ userId })
+    .post()
+    .then((response) => {
+      console.log("hey", response)
+      if (in200s(response.status)) {
+        return response.data
+      }
+      return null
+    })
+    .catch((error) => {
+      throw new error('could not connect')
+    })
 }
 
 export const loginService = {
   authenticateUser,
+  verifyUserId,
 }

@@ -18,9 +18,8 @@ const App = ({navigation}) => {
     <View style={{flex: 1}}>
       <Text style={styles.titleText}>ABP</Text>
       <View style={styles.screenContainer}>
-        <AppButton title="Login!" size="sm" backgroundColor="#007bff"  onPress={()=> navigation.navigate('Login')}/>
+        <AppButton title="Login!" size="sm" backgroundColor="#007bff"  onPress={()=> navigation.navigate('UserId')}/>
         <AppButton title="Request for a connection" size="sm" backgroundColor="#007bff" onPress={()=> navigation.navigate('RequestConnection')}/>
-        <AppButton title="Sign up" size="sm" backgroundColor="#007bff" />
       </View>
     </View>
   )

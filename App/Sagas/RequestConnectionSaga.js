@@ -6,7 +6,6 @@ import NavigationService from 'App/Services/NavigationService'
 export function* requestConnection(action) {
   try {
 		const data = yield call(requestConnectionService.requestConnection, [action.connectionDetails])
-		console.log("hehe", data)
     if (data) {
       yield put(RequestConnectionActions.requestConnectionSuccessful())
       NavigationService.navigate('Thankyou')

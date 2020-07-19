@@ -4,13 +4,17 @@ import StartScreen from 'App/Containers/Main/StartScreen'
 import { createAppContainer, createStackNavigator } from 'react-navigation'
 import RequestConnectionScreen from 'App/Containers/Request-Connection/RequestConnectionScreen'
 import ThankyouScreen from 'App/Containers/Thankyou/ThankyouScreen'
+import UserIdScreen from '../Containers/UserId/UserIdScreen'
+import SignupScreen from '../Containers/Signup/SignupScreen'
 const StackNavigator = createStackNavigator(
   {
     MainScreen: StartScreen,
     Login: LoginScreen,
     Home: HomeScreen,
     RequestConnection: RequestConnectionScreen,
-    Thankyou: ThankyouScreen
+    Thankyou: ThankyouScreen,
+    UserId: UserIdScreen,
+    Signup: SignupScreen
   },
   {
     initialRouteName: 'MainScreen',

@@ -4,14 +4,13 @@ import { ApplicationStyles, Fonts } from 'App/Theme'
 import React, { Component } from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
-import styles from './LoginScreenStyles'
+import styles from './UserIdScreenStyles'
 
-class LoginScreen extends Component {
+class UserIdScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      userName: '',
-      password: '',
+      userId: '',
     }
   }
 
@@ -19,30 +18,21 @@ class LoginScreen extends Component {
     return (
       <View style={styles.container}>
         <Loader loading={this.props.isLoading} />
-        <Text style={Fonts.h3}>Login</Text>
+        <Text style={Fonts.h3}>User Id</Text>
         <TextInput
           style={ApplicationStyles.input}
           underlineColorAndroid="transparent"
           placeholder="User Id"
           placeholderTextColor="grey"
           autoCapitalize="none"
-          onChangeText={(text) => this.setState({ userName: text })}
-        />
-
-        <TextInput
-          style={ApplicationStyles.input}
-          underlineColorAndroid="transparent"
-          placeholder="Password"
-          placeholderTextColor="grey"
-          autoCapitalize="none"
-          onChangeText={(text) => this.setState({ password: text })}
+          onChangeText={(text) => this.setState({ userId: text })}
         />
 
         <TouchableOpacity
           style={ApplicationStyles.button}
-          onPress={() => this.props.login(this.state.userName, this.state.password)}
+          onPress={() => this.props.verifyUserId(this.state.userId)}
         >
-          <Text style={styles.submitButtonText}> Login </Text>
+          <Text style={styles.submitButtonText}> Next </Text>
         </TouchableOpacity>
         {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
       </View>
@@ -55,10 +45,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (userName, password) => dispatch(LoginActions.authenticate(userName, password)),
+  verifyUserId: (userId) => dispatch(LoginActions.verifyUserId(userId)),
 })
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginScreen)
+)(UserIdScreen)
