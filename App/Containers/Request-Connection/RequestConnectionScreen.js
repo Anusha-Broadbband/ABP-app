@@ -1,13 +1,14 @@
+import FormInput from 'App/Components/FormInput/FormInput'
+import Loader from 'App/Components/Loader'
+import RequestConnectionActions from 'App/Stores/RequestConnection/Actions'
 import { ApplicationStyles, Fonts } from 'App/Theme'
 import React, { Component } from 'react'
-import { Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Text, View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { connect } from 'react-redux'
+import FormButton from '../../Components/FormButton/FormButton'
 import styles from './RequestConnectionScreenStyles'
-import Loader from 'App/Components/Loader'
-import RequestConnectionActions from 'App/Stores/RequestConnection/Actions'
-
 class RequestConnection extends Component {
   constructor(props) {
     super(props)
@@ -27,13 +28,14 @@ class RequestConnection extends Component {
         <Text style={Fonts.h3}>Request for connection form</Text>
         <View style={styles.container}>
           <Loader loading={this.props.isLoading} />
-          <TextInput
-            style={ApplicationStyles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Name"
-            placeholderTextColor="black"
+          <FormInput
+            name="Name"
+            value={this.state.userId}
+            placeholder="Please enter name"
             autoCapitalize="none"
             onChangeText={(name) => this.setState({ name })}
+            iconName="user"
+            iconColor="#2C384A"
           />
 
           <DropDownPicker
@@ -49,9 +51,9 @@ class RequestConnection extends Component {
                 value: '1 year',
               },
             ]}
-            defaultValue={this.state.plan}
+            placeholder="Please choose plan"
             itemStyle={{
-              justifyContent: 'flex-start',
+              justifyContent: 'center',
             }}
             dropDownStyle={{ backgroundColor: '#fafafa' }}
             onChangeItem={(item) =>
@@ -61,48 +63,56 @@ class RequestConnection extends Component {
             }
           />
 
-          <TextInput
-            style={ApplicationStyles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Email"
-            placeholderTextColor="black"
+          <FormInput
+            name="Email"
+            value={this.state.email}
+            placeholder="Please enter email"
             autoCapitalize="none"
             onChangeText={(email) => this.setState({ email })}
+            iconName="email"
+            iconColor="#2C384A"
           />
-          <TextInput
-            style={ApplicationStyles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Mobile Number"
-            placeholderTextColor="black"
+
+          <FormInput
+            name="mobileNumber"
+            value={this.state.mobileNumber}
+            placeholder="Please enter mobile number"
             autoCapitalize="none"
             onChangeText={(mobileNumber) => this.setState({ mobileNumber })}
+            iconName="mobile"
+            iconColor="#2C384A"
           />
 
-          <TextInput
-            style={ApplicationStyles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Land Mark"
-            placeholderTextColor="black"
+          <FormInput
+            name="landMark"
+            value={this.state.landMark}
+            placeholder="Please enter landMark"
             autoCapitalize="none"
             onChangeText={(landMark) => this.setState({ landMark })}
+            iconName="address"
+            iconColor="#2C384A"
           />
 
-          <TextInput
-            style={ApplicationStyles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Address"
-            placeholderTextColor="black"
+          <FormInput
+            name="address"
+            value={this.state.address}
+            placeholder="Please enter address"
             autoCapitalize="none"
+            onChangeText={(address) => this.setState({ address })}
             multiline={true}
             numberOfLines={4}
-            onChangeText={(address) => this.setState({ address })}
+            iconName="address"
+            iconColor="#2C384A"
           />
-          <TouchableOpacity
-            style={ApplicationStyles.button}
-            onPress={() => this.props.request(this.state)}
-          >
-            <Text style={styles.submitButtonText}> Submit </Text>
-          </TouchableOpacity>
+
+          <View style={ApplicationStyles.button}>
+            <FormButton
+              buttonType="outline"
+              onPress={() => this.props.request(this.state)}
+              title="Request"
+              buttonColor="#fff"
+            />
+          </View>
         </View>
       </KeyboardAwareScrollView>
     )

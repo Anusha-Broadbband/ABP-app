@@ -7,6 +7,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { connect } from 'react-redux'
 import styles from './SignupScreenStyles'
 import Icon from 'react-native-vector-icons/Entypo'
+import FormInput from 'App/Components/FormInput/FormInput'
+import FormButton from '../../Components/FormButton/FormButton'
 
 class SignupScreen extends Component {
   constructor(props) {
@@ -17,6 +19,11 @@ class SignupScreen extends Component {
       confirmPassword: '',
       matched: false,
     }
+  }
+
+  handleOnSignUp = () => {
+    const { userId, password } = this.state
+    this.props.signup({ userId, password })
   }
 
   verifyPassword = () => {
@@ -38,71 +45,65 @@ class SignupScreen extends Component {
         <Text style={Fonts.h3}>Sign Up</Text>
         <View style={styles.container}>
           <Loader loading={this.props.isLoading} />
-          <TextInput
-            style={ApplicationStyles.input}
-            underlineColorAndroid="transparent"
+          <FormInput
+            name="User id"
+            value={this.state.userId}
             defaultValue={this.props.userId}
             placeholder="User id"
-            placeholderTextColor="black"
-            editable={false}
             autoCapitalize="none"
             onChangeText={(userId) => this.setState({ userId })}
+            iconName="user"
+            iconColor="#2C384A"
+            editable={false}
           />
 
-          <TextInput
-            style={ApplicationStyles.input}
-            underlineColorAndroid="transparent"
-            secureTextEntry = {true}
-            placeholder="Password"
-            placeholderTextColor="black"
-            autoCapitalize="none"
+          <FormInput
+            name="password"
+            value={this.state.password}
+            placeholder="Enter password"
+            secureTextEntry
             onChangeText={(password) =>
               this.setState({ password }, () => {
                 this.state.confirmPassword ? this.verifyPassword() : null
               })
             }
+            iconName="lock"
+            iconColor="#2C384A"
           />
 
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
+          <FormInput
+            name="confirmPassword"
+            value={this.state.confirmPassword}
+            placeholder="Enter confirm password"
+            secureTextEntry
+            onChangeText={(confirmPassword) => {
+              this.setState({ confirmPassword }, () => {
+                this.verifyPassword()
+              })
             }}
-          >
-            <TextInput
-              style={[ApplicationStyles.input, { flex: 1 }]}
-              underlineColorAndroid="transparent"
-              secureTextEntry = {true}
-              placeholder="Confirm password"
-              placeholderTextColor="black"
-              autoCapitalize="none"
-              onChangeText={(confirmPassword) => {
-                this.setState({ confirmPassword }, () => {
-                  this.verifyPassword()
-                })
-              }}
+            iconName="lock"
+            iconColor="#2C384A"
+          />
+
+          {this.state.confirmPassword ? (
+            this.state.matched ? (
+              <Icon name="check" color="green" size={20} />
+            ) : (
+              <Icon name="cross" color="red" size={20} />
+            )
+          ) : null}
+
+          <View style={ApplicationStyles.button}>
+            <FormButton
+              buttonType="outline"
+              onPress={this.handleOnSignUp}
+              title="Sign Up"
+              buttonColor="#fff"
+              disabled={!this.state.matched}
             />
-            {this.state.confirmPassword ? (
-              this.state.matched ? (
-                <Icon name="check" color="green" size={20}/>
-              ) : (
-                <Icon name="cross" color="red" size={20}/>
-              )
-            ) : null}
           </View>
 
-          <TouchableOpacity
-            style={ApplicationStyles.button}
-            onPress={() =>
-              this.props.signup({ userId: this.state.userId, password: this.state.password })
-            }
-            disabled={!this.state.matched}
-          >
-            <Text style={styles.submitButtonText}> Sign Up </Text>
-            {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
-          </TouchableOpacity>
+          {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
         </View>
       </KeyboardAwareScrollView>
     )

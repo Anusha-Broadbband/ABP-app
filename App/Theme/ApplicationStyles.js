@@ -15,14 +15,11 @@ export default {
   dropdown: {
     margin: 15,
     height: 40,
-    borderColor: Colors.primary,
-    borderWidth: 1,
+    borderWidth: 0,
+    borderBottomWidth: 1
   },
   button: {
-    backgroundColor: Colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
+    backgroundColor: Colors.primary, 
     margin: 15,
     height: 40,
   },
