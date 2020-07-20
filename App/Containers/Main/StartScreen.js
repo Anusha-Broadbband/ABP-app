@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from './StartScreenStyle'
+import { Header } from 'react-native-elements'
+import { Colors } from 'App/Theme'
+import Icon from 'react-native-vector-icons/Entypo'
+import IonIcon from 'react-native-vector-icons/Ionicons'
 
 TouchableOpacity.defaultProps = { activeOpacity: 0.8 }
 
@@ -13,15 +17,35 @@ const AppButton = ({ onPress, title }) => (
   </TouchableOpacity>
 )
 
-const App = ({navigation}) => {
+const App = ({ navigation }) => {
   return (
-    <View style={{flex: 1}}>
-      <Text style={styles.titleText}>ABP</Text>
+    <Fragment>
+      <Header
+        backgroundColor={Colors.primary}
+        centerComponent={{
+          text: 'Welcome to ABP Broadband',
+          style: { fontSize: 18, color: 'white' },
+        }}
+      />
+
+      <View />
       <View style={styles.screenContainer}>
-        <AppButton title="Login!" size="sm" backgroundColor="#007bff"  onPress={()=> navigation.navigate('UserId')}/>
-        <AppButton title="Request for a connection" size="sm" backgroundColor="#007bff" onPress={()=> navigation.navigate('RequestConnection')}/>
+        <TouchableOpacity onPress={() => navigation.navigate('UserId')}>
+          <View style={styles.card}>
+            <Icon name="login" size={40} color="#fff" />
+            <Text style={{ color: '#fff', fontSize: 20, margin: 10 }}>Login</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('RequestConnection')}>
+          <View style={styles.card}>
+            <IonIcon name="add" size={40} color="#fff" />
+            <Text style={{ color: '#fff', fontSize: 20, margin: 10, textAlign: 'center' }}>
+              New Connection
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
-    </View>
+    </Fragment>
   )
 }
 

@@ -2,16 +2,18 @@ import { Helpers, Metrics } from 'App/Theme'
 import React from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
+import { TabNavigator } from 'react-navigation'
+import { Header } from 'react-native-elements'
 
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       userName: null,
-      password: null
+      password: null,
     }
   }
-  
+
   render() {
     return (
       <View
@@ -22,24 +24,19 @@ class HomeScreen extends React.Component {
           Metrics.mediumVerticalMargin,
         ]}
       >
-        <View style={{alignContent: 'center', justifyContent: 'center'}}>
-      <Text>Welcome {this.props.userDetails.name}</Text>
+        <View style={{ alignContent: 'center', justifyContent: 'center' }}>
+          <Text>Welcome {this.props.userDetails.name}</Text>
         </View>
       </View>
     )
   }
-
-}
-
-HomeScreen.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
   userDetails: state.login.userDetails,
 })
 
-const mapDispatchToProps = () => ({
-})
+const mapDispatchToProps = () => ({})
 
 export default connect(
   mapStateToProps,

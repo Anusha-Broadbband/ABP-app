@@ -15,7 +15,7 @@ import { Formik } from 'formik'
 
 const validationSchema = yup.object({
   password: yup.string().required('Password is required'),
-  confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match'),
+  confirmPassword: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required('Confirm password is required.'),
 })
 
 class SignupScreen extends Component {
@@ -59,8 +59,9 @@ class SignupScreen extends Component {
                   onChangeText={handleChange('password')}
                   iconName="lock"
                   iconColor="#2C384A"
+                  errorMessage={errors.password}
+                  errorStyle={{ fontSize: 10 }}
                 />
-                <ErrorMessage errorValue={errors.password} />
 
                 <FormInput
                   name="confirmPassword"
@@ -70,18 +71,16 @@ class SignupScreen extends Component {
                   onChangeText={handleChange('confirmPassword')}
                   iconName="lock"
                   iconColor="#2C384A"
+                  errorMessage={errors.confirmPassword}
+                  errorStyle={{ fontSize: 10 }}
                 />
 
-                <ErrorMessage errorValue={errors.confirmPassword} />
-
-                <View style={ApplicationStyles.button}>
-                  <FormButton
-                    buttonType="outline"
-                    onPress={handleSubmit}
-                    title="Sign Up"
-                    buttonColor="#fff"
-                  />
-                </View>
+                <FormButton
+                  buttonType="solid"
+                  onPress={handleSubmit}
+                  title="Sign Up"
+                  buttonColor="#fff"
+                />
                 {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
               </Fragment>
             )}

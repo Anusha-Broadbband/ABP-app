@@ -20,7 +20,7 @@ export default {
   },
   button: {
     backgroundColor: Colors.primary, 
-    margin: 15,
-    height: 40,
+    // margin: 15,
+    // height: 60,
   },
 }

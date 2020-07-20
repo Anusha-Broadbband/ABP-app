@@ -58,17 +58,16 @@ class LoginScreen extends Component {
                 onChangeText={handleChange('password')}
                 iconName="lock"
                 iconColor="#2C384A"
+                errorMessage={errors.password}
+                errorStyle={{ fontSize: 10 }}
               />
-              <ErrorMessage errorValue={errors.password} />
 
-              <View style={ApplicationStyles.button}>
-                <FormButton
-                  buttonType="outline"
-                  onPress={handleSubmit}
-                  title="Login"
-                  buttonColor="#fff"
-                />
-              </View>
+              <FormButton
+                buttonType="solid"
+                onPress={handleSubmit}
+                title="Login"
+                buttonColor="#fff"
+              />
               {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
             </Fragment>
           )}

@@ -15,25 +15,31 @@ import { curryN } from 'ramda'
 import * as yup from 'yup'
 
 const validationSchema = yup.object().shape({
-  name: yup.string()
+  name: yup
+    .string()
     .label('Name')
     .required('Please enter name.'),
-  mobile: yup.number()
+  mobile: yup
+    .number()
     .label('MobileNumber')
     .required('Please enter mobile number.')
     .min(10, 'Mobile number should be at least 10 digits.')
     .max(10, 'Mobile number should be at least 10 digits.'),
-  email: yup.string()
+  email: yup
+    .string()
     .label('Email')
     .email('Enter a valid email')
     .required('Please enter valid email.'),
-  landMark: yup.string()
+  landMark: yup
+    .string()
     .label('LandMark')
     .required('Please enter land mark.'),
-  plan: yup.string()
+  plan: yup
+    .string()
     .label('Plan')
     .required('Please choose one of the plan.'),
-  address: yup.string()
+  address: yup
+    .string()
     .label('Address')
     .required('Please enter address.'),
 })
@@ -47,8 +53,8 @@ class RequestConnection extends Component {
   render() {
     return (
       <KeyboardAwareScrollView>
-        <Text style={Fonts.h3}>Request for connection form</Text>
         <View style={styles.container}>
+          <Text style={Fonts.h3}>Request for connection form</Text>
           <Loader loading={this.props.isLoading} />
           <Formik
             initialValues={{
@@ -72,8 +78,10 @@ class RequestConnection extends Component {
                   onChangeText={handleChange('name')}
                   iconName="user"
                   iconColor="#2C384A"
+                  errorMessage={errors.name}
+                  errorStyle={{ fontSize: 10 }}
                 />
-                <ErrorMessage errorValue={errors.name} />
+                {/* <ErrorMessage errorValue={errors.name} /> */}
 
                 <DropDownPicker
                   style={ApplicationStyles.dropdown}
@@ -89,6 +97,7 @@ class RequestConnection extends Component {
                     },
                   ]}
                   placeholder="Please choose plan"
+                  placeholderStyle={{ color: 'grey', fontSize: 15 }}
                   itemStyle={{
                     justifyContent: 'center',
                   }}
@@ -105,8 +114,10 @@ class RequestConnection extends Component {
                   onChangeText={handleChange('email')}
                   iconName="email"
                   iconColor="#2C384A"
+                  errorMessage={errors.email}
+                  errorStyle={{ fontSize: 10 }}
                 />
-                <ErrorMessage errorValue={errors.email} />
+                {/* <ErrorMessage errorValue={errors.email} /> */}
 
                 <FormInput
                   name="mobileNumber"
@@ -116,8 +127,10 @@ class RequestConnection extends Component {
                   onChangeText={handleChange('mobile')}
                   iconName="mobile"
                   iconColor="#2C384A"
+                  errorMessage={errors.mobile}
+                  errorStyle={{ fontSize: 10 }}
                 />
-                <ErrorMessage errorValue={errors.mobile} />
+                {/* <ErrorMessage errorValue={errors.mobile} /> */}
 
                 <FormInput
                   name="landMark"
@@ -127,8 +140,10 @@ class RequestConnection extends Component {
                   onChangeText={handleChange('landMark')}
                   iconName="address"
                   iconColor="#2C384A"
+                  errorMessage={errors.landMark}
+                  errorStyle={{ fontSize: 10 }}
                 />
-                <ErrorMessage errorValue={errors.landMark} />
+                {/* <ErrorMessage errorValue={errors.landMark} /> */}
 
                 <FormInput
                   name="address"
@@ -140,17 +155,17 @@ class RequestConnection extends Component {
                   numberOfLines={4}
                   iconName="address"
                   iconColor="#2C384A"
+                  errorMessage={errors.address}
+                  errorStyle={{ fontSize: 10 }}
                 />
-                <ErrorMessage errorValue={errors.address} />
+                {/* <ErrorMessage errorValue={errors.address} /> */}
 
-                <View style={ApplicationStyles.button}>
-                  <FormButton
-                    buttonType="outline"
-                    onPress={handleSubmit}
-                    title="Request"
-                    buttonColor="#fff"
-                  />
-                </View>
+                <FormButton
+                  buttonType="solid"
+                  onPress={handleSubmit}
+                  title="Request"
+                  buttonColor="#fff"
+                />
               </Fragment>
             )}
           </Formik>

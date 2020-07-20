@@ -23,6 +23,7 @@ const FormInput = ({
       value={value}
       placeholder={placeholder}
       style={styles.input}
+      containerStyle={{margin: 0}}
     />
   </View>
 )

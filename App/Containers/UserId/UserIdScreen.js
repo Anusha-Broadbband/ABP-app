@@ -46,17 +46,18 @@ class UserIdScreen extends Component {
                 onChangeText={handleChange('userId')}
                 iconName="user"
                 iconColor="#2C384A"
+                errorMessage={errors.userId}
+                errorStyle={{fontSize: 10}}
               />
-              <ErrorMessage errorValue={errors.userId} />
+              {/* <ErrorMessage errorValue={errors.userId} /> */}
 
-              <View style={ApplicationStyles.button}>
-                <FormButton
-                  buttonType="outline"
-                  onPress={handleSubmit}
-                  title="Next"
-                  buttonColor="#fff"
-                />
-              </View>
+              <FormButton
+                buttonType="solid"
+                onPress={handleSubmit}
+                title="Next"
+                buttonColor="#fff"
+                butt
+              />
               {this.props.errorMessage && <Text>{this.props.errorMessage}</Text>}
             </Fragment>
           )}

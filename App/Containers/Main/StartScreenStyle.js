@@ -2,8 +2,10 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   screenContainer: {
-    justifyContent: "center",
-    padding: 10
+    flex: 1,
+    justifyContent:"space-around",
+    alignItems: 'center',
+    flexDirection: 'row'
   },
   appButtonContainer: {
     elevation: 8,
@@ -27,5 +29,15 @@ export default StyleSheet.create({
     alignSelf: "center",
 		textTransform: "uppercase",
 		marginBottom: 20
+  },
+  card: {
+    margin: 20,
+    width: 150,
+    height: 50,
+    backgroundColor: '#005AAC',
+    borderRadius: 20,
+    flex: 0.25,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
