@@ -12,28 +12,28 @@ import ErrorMessage from '../../Components/ErrorMessage/ErrorMessage'
 import styles from './RequestConnectionScreenStyles'
 import { Formik } from 'formik'
 import { curryN } from 'ramda'
-import * as Yup from 'yup'
+import * as yup from 'yup'
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string()
+const validationSchema = yup.object().shape({
+  name: yup.string()
     .label('Name')
     .required('Please enter name.'),
-  mobile: Yup.number()
+  mobile: yup.number()
     .label('MobileNumber')
     .required('Please enter mobile number.')
     .min(10, 'Mobile number should be at least 10 digits.')
     .max(10, 'Mobile number should be at least 10 digits.'),
-  email: Yup.string()
+  email: yup.string()
     .label('Email')
     .email('Enter a valid email')
     .required('Please enter valid email.'),
-  landMark: Yup.string()
+  landMark: yup.string()
     .label('LandMark')
     .required('Please enter land mark.'),
-  plan: Yup.string()
+  plan: yup.string()
     .label('Plan')
     .required('Please choose one of the plan.'),
-  address: Yup.string()
+  address: yup.string()
     .label('Address')
     .required('Please enter address.'),
 })
@@ -113,7 +113,7 @@ class RequestConnection extends Component {
                   value={values.mobileNumber}
                   placeholder="Please enter mobile number"
                   autoCapitalize="none"
-                  onChangeText={handleChange('mobileNumber')}
+                  onChangeText={handleChange('mobile')}
                   iconName="mobile"
                   iconColor="#2C384A"
                 />
