@@ -13,26 +13,27 @@ import RequestConnectionScreen from 'App/Containers/Request-Connection/RequestCo
 import ThankyouScreen from 'App/Containers/Thankyou/ThankyouScreen'
 import UserIdScreen from '../Containers/UserId/UserIdScreen'
 import SignupScreen from '../Containers/Signup/SignupScreen'
+import { Colors } from 'App/Theme'
 const tabNavigatorScreen = createBottomTabNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: () => <Icon name="home" size={30} color="#004d40" />,
+      tabBarIcon: () => <Icon name="home" size={30} color={Colors.primary} />,
     },
   },
   Payment: {
     screen: LoginScreen,
     navigationOptions: {
       tabBarLabel: 'Payment',
-      tabBarIcon: () => <MaterialIcon name="payment" size={30} color="#004d40" />,
+      tabBarIcon: () => <MaterialIcon name="payment" size={30} color={Colors.primary} />,
     },
   },
   Profile: {
     screen: LoginScreen,
     navigationOptions: {
       tabBarLabel: 'Profile',
-      tabBarIcon: () => <MaterialIcon name="payment" size={30} color="#004d40" />,
+      tabBarIcon: () => <MaterialIcon name="payment" size={30} color={Colors.primary} />,
     },
   },
 })
