@@ -1,9 +1,8 @@
-import { Helpers, Metrics } from 'App/Theme'
+import Drawer from 'App/Components/Drawer/Drawer'
 import React from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
-import { TabNavigator } from 'react-navigation'
-import { Header } from 'react-native-elements'
+import {Header} from 'react-native-elements'
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -16,14 +15,11 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View
-        style={[
-          Helpers.fill,
-          Helpers.rowMain,
-          Metrics.mediumHorizontalMargin,
-          Metrics.mediumVerticalMargin,
-        ]}
-      >
+      <View>
+        <Header
+          leftComponent={<Drawer/>}
+          centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+        />
         <View style={{ alignContent: 'center', justifyContent: 'center' }}>
           <Text>Welcome {this.props.userDetails.name}</Text>
         </View>

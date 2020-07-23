@@ -1,20 +1,23 @@
 import HomeScreen from 'App/Containers/Home/HomeScreen'
+import LoginScreen from 'App/Containers/Login/LoginScreen'
+import StartScreen from 'App/Containers/Main/StartScreen'
+import RequestConnectionScreen from 'App/Containers/Request-Connection/RequestConnectionScreen'
+import ThankyouScreen from 'App/Containers/Thankyou/ThankyouScreen'
+import DrawerNavigator from 'App/Navigators/DrawerNavigator'
+import { Colors } from 'App/Theme'
 import React from 'react'
 import Icon from 'react-native-vector-icons/Entypo'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import LoginScreen from 'App/Containers/Login/LoginScreen'
-import StartScreen from 'App/Containers/Main/StartScreen'
 import {
   createAppContainer,
-  createStackNavigator,
   createBottomTabNavigator,
+  createDrawerNavigator,
+  createStackNavigator,
 } from 'react-navigation'
-import RequestConnectionScreen from 'App/Containers/Request-Connection/RequestConnectionScreen'
-import ThankyouScreen from 'App/Containers/Thankyou/ThankyouScreen'
-import UserIdScreen from '../Containers/UserId/UserIdScreen'
 import SignupScreen from '../Containers/Signup/SignupScreen'
-import { Colors } from 'App/Theme'
-const tabNavigatorScreen = createBottomTabNavigator({
+import UserIdScreen from '../Containers/UserId/UserIdScreen'
+
+const TabNavigator = createBottomTabNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: {
@@ -42,7 +45,7 @@ const StackNavigator = createStackNavigator(
   {
     Main: StartScreen,
     Login: LoginScreen,
-    Home: tabNavigatorScreen,
+    Home: TabNavigator,
     RequestConnection: RequestConnectionScreen,
     Thankyou: ThankyouScreen,
     UserId: UserIdScreen,
@@ -54,4 +57,16 @@ const StackNavigator = createStackNavigator(
   }
 )
 
-export default createAppContainer(StackNavigator)
+const MainNavigator = createDrawerNavigator(
+  {
+    Stack: StackNavigator,
+    drawer: DrawerNavigator,
+  },
+  {
+    initialRouteName: 'Stack',
+    headerMode: 'none',
+    overlayColor: 'trasnsparent'
+  }
+)
+
+export default createAppContainer(MainNavigator)
