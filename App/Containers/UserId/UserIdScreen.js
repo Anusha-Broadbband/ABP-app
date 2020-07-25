@@ -27,7 +27,7 @@ class UserIdScreen extends Component {
     return (
       <View style={styles.container}>
         <Loader loading={this.props.isLoading} />
-        <Text style={Fonts.h3}>User Id</Text>
+        <Text style={[Fonts.h3, {textAlign: 'center'}]}>User Id</Text>
 
         <Formik
           initialValues={{

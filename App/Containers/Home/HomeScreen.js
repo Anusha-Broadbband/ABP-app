@@ -3,6 +3,7 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import {Header} from 'react-native-elements'
+import {Colors} from 'App/Theme'
 
 class HomeScreen extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class HomeScreen extends React.Component {
       <View>
         <Header
           leftComponent={<Drawer/>}
-          centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+          backgroundColor={Colors.primary}
+          centerComponent={{ text: 'ABP Broadband Services', style: { color: '#fff',fontSize: 18 } }}
         />
         <View style={{ alignContent: 'center', justifyContent: 'center' }}>
           <Text>Welcome {this.props.userDetails.name}</Text>

@@ -15,7 +15,10 @@ import { Formik } from 'formik'
 
 const validationSchema = yup.object({
   password: yup.string().required('Password is required'),
-  confirmPassword: yup.string().oneOf([yup.ref('password')], 'Passwords must match').required('Confirm password is required.'),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref('password')], 'Passwords must match')
+    .required('Confirm password is required.'),
 })
 
 class SignupScreen extends Component {
@@ -26,9 +29,8 @@ class SignupScreen extends Component {
 
   render() {
     return (
-      <KeyboardAwareScrollView>
-        <Text style={Fonts.h3}>Sign Up</Text>
         <View style={styles.container}>
+          <Text style={[Fonts.h3,{textAlign: 'center'}]}>Sign Up</Text>
           <Loader loading={this.props.isLoading} />
           <Formik
             initialValues={{
@@ -86,7 +88,6 @@ class SignupScreen extends Component {
             )}
           </Formik>
         </View>
-      </KeyboardAwareScrollView>
     )
   }
 }

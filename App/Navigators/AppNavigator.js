@@ -3,9 +3,9 @@ import LoginScreen from 'App/Containers/Login/LoginScreen'
 import StartScreen from 'App/Containers/Main/StartScreen'
 import RequestConnectionScreen from 'App/Containers/Request-Connection/RequestConnectionScreen'
 import ThankyouScreen from 'App/Containers/Thankyou/ThankyouScreen'
-import DrawerNavigator from 'App/Navigators/DrawerNavigator'
-import { Colors } from 'App/Theme'
+import { Colors, Fonts } from 'App/Theme'
 import React from 'react'
+import { View, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/Entypo'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import {
@@ -16,30 +16,47 @@ import {
 } from 'react-navigation'
 import SignupScreen from '../Containers/Signup/SignupScreen'
 import UserIdScreen from '../Containers/UserId/UserIdScreen'
+import { Avatar } from 'react-native-elements'
+import Profile from 'App/Components/Profile/Profile'
 
-const TabNavigator = createBottomTabNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      tabBarLabel: 'Home',
-      tabBarIcon: () => <Icon name="home" size={30} color={Colors.primary} />,
+const TabNavigator = createBottomTabNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: {
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ focused }) => (
+          <Icon name="home" size={30} color={focused ? Colors.primary : Colors.grey} />
+        ),
+      },
+    },
+    Payment: {
+      screen: LoginScreen,
+      navigationOptions: {
+        tabBarLabel: 'Payment',
+        tabBarIcon: ({ focused }) => (
+          <MaterialIcon name="payment" size={30} color={focused ? Colors.primary : Colors.grey} />
+        ),
+      },
+    },
+    Profile: {
+      screen: LoginScreen,
+      navigationOptions: {
+        tabBarLabel: 'Profile',
+        tabBarIcon: ({ focused }) => (
+          <MaterialIcon name="payment" size={30} color={focused ? Colors.primary : Colors.grey} />
+        ),
+      },
     },
   },
-  Payment: {
-    screen: LoginScreen,
-    navigationOptions: {
-      tabBarLabel: 'Payment',
-      tabBarIcon: () => <MaterialIcon name="payment" size={30} color={Colors.primary} />,
+  {
+    initialRouteName: 'Home',
+    tabBarOptions: {
+      activeTintColor: 'grey',
+      inactiveTintColor: 'gray',
     },
-  },
-  Profile: {
-    screen: LoginScreen,
-    navigationOptions: {
-      tabBarLabel: 'Profile',
-      tabBarIcon: () => <MaterialIcon name="payment" size={30} color={Colors.primary} />,
-    },
-  },
-})
+  }
+)
 
 const StackNavigator = createStackNavigator(
   {
@@ -52,20 +69,32 @@ const StackNavigator = createStackNavigator(
     Signup: SignupScreen,
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: 'Home',
     headerMode: 'none',
   }
 )
 
 const MainNavigator = createDrawerNavigator(
   {
-    Stack: StackNavigator,
-    drawer: DrawerNavigator,
+    Stack: {
+      screen: StackNavigator,
+      navigationOptions: {
+        drawerLabel: () => null,
+      },
+    },
+    One: HomeScreen,
   },
+
   {
     initialRouteName: 'Stack',
     headerMode: 'none',
-    overlayColor: 'trasnsparent'
+    overlayColor: 'trasnsparent',
+    drawrBackgroundColor: 'white',
+    contentComponent: (props) => (
+      <View style={{flex: 1}}>
+        <Profile></Profile>
+      </View>
+    ),
   }
 )
 

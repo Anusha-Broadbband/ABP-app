@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
   container: {
     paddingTop: 23,
+    flex: 1,
+    justifyContent: 'center',
   },
 	submitButton: {
     backgroundColor: '#7a42f4',
